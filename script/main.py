@@ -9,7 +9,7 @@ def maximum(val1, val2):
 
 def select(arquivos):
     dataframes = []
-    print(f"Processando arquivos selecionados...")
+    print(f"Processando arquivos selecionados..")
 
     for path in arquivos:
         print(f"Lendo arquivo: {path}")
