@@ -37,8 +37,8 @@ def select(arquivos):
             print(f"Arquivo {path} ignorado: formato inesperado")
 
     if dataframes:
-        df_consolidado = pd.concat(dataframes, ignore_index=True)
-        df_consolidado.to_excel('Banco_de_dados_GERAL.xlsx', index=False)
+        df_final = pd.concat(dataframes, ignore_index=True)
+        df_final.to_excel('Banco_de_dados_GERAL.xlsx', index=False)
         print("Arquivo consolidado gerado com sucesso!")
     else:
         print("Nenhum dado válido encontrado para consolidar.")
@@ -49,15 +49,22 @@ def escolher_arquivos():
     if arquivos:
         select(arquivos)
 
-# Configuração da interface gráfica
-ctk.set_appearance_mode("dark")  # Modo escuro
-ctk.set_default_color_theme("dark-blue")  # Tema azul escuro
+def centralizar(app, width, height):
+    screen_width = app.winfo_screenwidth()
+    screen_height = app.winfo_screenheight()
+    pos_x = int((screen_width / 2) - (width / 2))
+    pos_y = int((screen_height / 2) - (height / 2))
+    app.geometry(f"{width}x{height}+{pos_x}+{pos_y}")
 
-app = ctk.CTk()  # Criação da janela principal
-app.geometry("400x200")
-app.title("Consolidador de Arquivos JumpSystem")
+ctk.set_appearance_mode("dark") 
+ctk.set_default_color_theme("dark-blue")  
 
-label = ctk.CTkLabel(app, text="Selecione os arquivos JumpSystem-Avaliação", pady=20)
+app = ctk.CTk() 
+centralizar(app, 800, 450)
+
+app.title("Engenharia de dados aplicada a análise do desempenho de atletas universitários")
+
+label = ctk.CTkLabel(app, text="Selecione as avaliações", pady=20)
 label.pack()
 
 botao = ctk.CTkButton(app, text="Escolher Arquivos", command=escolher_arquivos)
